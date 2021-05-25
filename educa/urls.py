@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from courses.views import CourseListView
 
 urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(),
@@ -10,4 +11,6 @@ urlpatterns = [
          name='logout'),
     path('admin/', admin.site.urls),
     path('course/', include('courses.urls')),
+    path('', CourseListView.as_view(), name='course_list'),
+
 ]
