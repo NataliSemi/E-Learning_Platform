@@ -25,6 +25,7 @@ class StudentRegistrationView(CreateView):
         login(self.request, user)
         return result
 
+
 class StudentEnrollCourseView(LoginRequiredMixin, FormView):
     course = None
     form_class = CourseEnrollForm
@@ -46,7 +47,6 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(students__in=[self.request.user])
-
 
 
 class StudentCourseDetailView(DetailView):
