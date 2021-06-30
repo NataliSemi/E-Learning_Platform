@@ -1,17 +1,14 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CourseEnrollForm
 from django.views.generic.list import ListView
-from courses.models import Course
 from django.views.generic.detail import DetailView
+from courses.models import Course
+from .forms import CourseEnrollForm
 
 
-# Create your views here.
 class StudentRegistrationView(CreateView):
     template_name = 'students/student/registration.html'
     form_class = UserCreationForm
@@ -64,7 +61,7 @@ class StudentCourseDetailView(DetailView):
         if 'module_id' in self.kwargs:
             # get current module
             context['module'] = course.modules.get(
-                            id=self.kwargs['module-id'])
+                                    id=self.kwargs['module_id'])
         else:
             # get first module
             context['module'] = course.modules.all()[0]
